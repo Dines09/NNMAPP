@@ -1,0 +1,14 @@
+{
+  "name": "2/O Bridge Reference",
+  "short_name": "2/O Bridge",
+  "description": "Second Officer quick reference — NMM bridge equipment, duties, arrival/departure.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d1117",
+  "theme_color": "#0d1117",
+  "icons": [
+    { "src": "icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

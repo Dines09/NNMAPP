@@ -1,0 +1,7 @@
+# never publish source manuals or company forms
+*.pdf
+*.xlsm
+*.xlsx
+_*.html
+.DS_Store
+Thumbs.db

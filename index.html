@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5f6f8" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0c1016" media="(prefers-color-scheme:dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="2/O Bridge">
+<title>2/O Bridge Reference</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="stylesheet" href="styles.css">
+<script>
+  // apply saved theme before paint to avoid a flash
+  (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+</script>
+</head>
+<body>
+
+<header id="top">
+  <div id="brand"><b>2/O</b> Bridge Reference</div>
+  <div class="pills">
+    <div class="pill"><span class="k">UTC</span><span class="v" id="utcT">--:--</span></div>
+    <div class="pill loc" id="locPill">
+      <span class="v" id="locT">--:--</span>
+      <span class="pl" id="locZ">—</span>
+    </div>
+    <button id="themeb" title="Toggle theme">◐</button>
+  </div>
+</header>
+
+<main>
+  <div id="list"></div>
+  <div id="detail"></div>
+</main>
+
+<nav id="dock">
+  <div id="glide"></div>
+  <button data-t="equip" class="on"><span class="ti">&#128225;</span>Equipment</button>
+  <button data-t="passage"><span class="ti">&#128506;</span>Passage</button>
+  <button data-t="duty"><span class="ti">&#9875;</span>Duties</button>
+  <button data-t="arr"><span class="ti">&#128674;</span>Arr/Dep</button>
+</nav>
+
+<div id="sheet">
+  <div class="sh">
+    <div class="sh-top">
+      <div class="sh-tt">
+        <h3>Select time zone</h3>
+        <button id="shClose">Done</button>
+      </div>
+      <input id="zq" type="search" placeholder="Search country, city or port…"
+             autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    </div>
+    <div id="zlist"></div>
+  </div>
+</div>
+
+<script src="data-equipment.js"></script>
+<script src="data-passage.js"></script>
+<script src="data-duties.js"></script>
+<script src="data-arrdep.js"></script>
+<script src="data-zones.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
