@@ -3,58 +3,434 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f5f6f8" media="(prefers-color-scheme:light)">
-<meta name="theme-color" content="#0c1016" media="(prefers-color-scheme:dark)">
+<meta name="theme-color" content="#061522">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="2/O Bridge">
-<title>2/O Bridge Reference</title>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NNMAPP">
+<title>NNMAPP — Marine Reference</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="stylesheet" href="styles.css">
 <script>
-  // apply saved theme before paint to avoid a flash
-  (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+(function(){
+  var t=localStorage.getItem("theme");
+  if(t) document.documentElement.setAttribute("data-theme",t);
+})();
 </script>
+
+<style>
+/* =========================================================
+   NNMAPP PREMIUM MOBILE HOME
+   Existing app.js IDs are intentionally preserved.
+   ========================================================= */
+
+:root{
+  --bg:#020a12;
+  --bg2:#061522;
+  --card:rgba(12,34,50,.72);
+  --card2:rgba(255,255,255,.055);
+  --line:rgba(255,255,255,.10);
+  --text:#f4f8fb;
+  --soft:#a9bdca;
+  --muted:#718896;
+  --blue:#58c8ff;
+  --blue2:#278cff;
+  --teal:#36d7c0;
+  --gold:#f5b84b;
+  --purple:#9d83ff;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:#020a12}
+body{
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;
+  background:
+    radial-gradient(circle at 8% -5%,rgba(41,151,255,.22),transparent 32%),
+    radial-gradient(circle at 100% 22%,rgba(98,77,255,.13),transparent 30%),
+    linear-gradient(180deg,#04111c 0%,#061522 45%,#020a12 100%);
+  padding-bottom:calc(105px + var(--safe-bottom));
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.025;
+  background-image:linear-gradient(rgba(255,255,255,.8) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.8) 1px,transparent 1px);
+  background-size:32px 32px;
+  mask-image:linear-gradient(to bottom,#000,transparent 78%);
+}
+
+/* ---------- header ---------- */
+#top{
+  max-width:760px;margin:auto;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:calc(14px + var(--safe-top)) 16px 8px;
+}
+#brand{
+  display:flex;align-items:center;gap:9px;min-width:0;
+  color:var(--soft);font-size:11px;font-weight:600;letter-spacing:.2px;
+}
+#brand b{color:#fff;font-size:17px;letter-spacing:.7px}
+#brand:before{
+  content:"⚓";display:grid;place-items:center;
+  width:35px;height:35px;border-radius:12px;
+  color:#fff;font-size:18px;
+  background:linear-gradient(145deg,#1499ff,#2149b9);
+  box-shadow:0 8px 25px rgba(31,139,255,.28),inset 0 1px 0 rgba(255,255,255,.25);
+}
+.pills{display:flex;align-items:center;gap:5px}
+.pill{
+  display:flex;align-items:center;gap:5px;
+  padding:7px 9px;border-radius:999px;
+  border:1px solid var(--line);background:rgba(255,255,255,.055);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+}
+.pill .k{font-size:8px;font-weight:800;color:var(--muted);letter-spacing:.7px}
+.pill .v{font-size:12px;font-weight:750;font-variant-numeric:tabular-nums}
+.pill .pl{font-size:8px;font-weight:700;color:var(--blue);max-width:48px;overflow:hidden;text-overflow:ellipsis}
+#themeb{
+  width:34px;height:34px;padding:0;border-radius:50%;
+  border:1px solid var(--line);background:rgba(255,255,255,.055);
+  color:#fff;cursor:pointer;
+}
+
+/* ---------- main ---------- */
+main{max-width:760px;margin:auto;padding:4px 14px 25px}
+
+/* ---------- hero ---------- */
+#homeHero{
+  position:relative;overflow:hidden;
+  min-height:275px;border-radius:28px;
+  border:1px solid rgba(255,255,255,.12);
+  background:
+    radial-gradient(circle at 78% 22%,rgba(255,191,79,.34),transparent 16%),
+    linear-gradient(180deg,rgba(28,80,111,.35),rgba(2,13,22,.08) 46%,rgba(2,10,18,.94) 100%),
+    linear-gradient(135deg,#163f58 0%,#0b2639 45%,#03111c 100%);
+  box-shadow:0 20px 50px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.08);
+}
+#homeHero:before{
+  content:"";position:absolute;left:-10%;right:-10%;bottom:38px;height:105px;
+  background:
+    repeating-radial-gradient(ellipse at 50% 100%,transparent 0 17px,rgba(74,190,232,.12) 18px 20px,transparent 21px 34px);
+  transform:perspective(250px) rotateX(55deg);opacity:.75;
+}
+#homeHero:after{
+  content:"";position:absolute;right:-30px;bottom:62px;
+  width:180px;height:110px;
+  background:linear-gradient(145deg,transparent 35%,rgba(255,255,255,.16) 36% 38%,transparent 39%);
+  transform:skewX(-18deg);opacity:.45;
+}
+.heroTop{
+  position:relative;z-index:2;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:19px 18px 0;
+}
+.heroTitle{font-size:12px;color:#c9dce7;font-weight:650}
+.heroTitle strong{display:block;color:#fff;font-size:25px;letter-spacing:-.7px;line-height:1.1;margin-top:3px}
+.heroMenu{
+  width:37px;height:37px;display:grid;place-items:center;border-radius:13px;
+  border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.07);
+  color:#fff;font-size:19px;
+}
+.heroQuote{
+  position:relative;z-index:2;margin:28px 18px 0;max-width:270px;
+  font-size:17px;line-height:1.25;font-weight:650;letter-spacing:-.2px;
+}
+.heroQuote small{display:block;color:#9fb7c6;font-size:10px;margin-top:8px;font-weight:600}
+.heroShip{
+  position:absolute;z-index:1;right:16px;bottom:62px;
+  width:210px;height:62px;transform:skewX(-9deg);
+}
+.heroShip .hull{
+  position:absolute;left:18px;right:5px;bottom:7px;height:23px;
+  background:linear-gradient(180deg,#6e8d9b,#263b48);
+  clip-path:polygon(0 0,100% 0,87% 100%,10% 100%);
+}
+.heroShip .deck{position:absolute;left:50px;bottom:30px;width:80px;height:10px;background:#b6c6cc}
+.heroShip .bridge{position:absolute;left:82px;bottom:40px;width:35px;height:25px;background:#d5dfe2;border-radius:2px}
+.heroShip .mast{position:absolute;left:99px;bottom:64px;width:2px;height:26px;background:#dce8ec}
+.heroShip .light{position:absolute;left:96px;bottom:88px;width:7px;height:7px;border-radius:50%;background:#ffd87a;box-shadow:0 0 18px #ffd87a}
+.wave{position:absolute;bottom:42px;left:0;right:0;height:2px;background:rgba(92,205,255,.25);filter:blur(.5px)}
+.clockPanel{
+  position:absolute;z-index:4;left:12px;right:12px;bottom:12px;
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  padding:9px;border-radius:19px;
+  background:rgba(3,16,27,.78);border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+}
+.clockBox{padding:8px 9px}
+.clockLabel{font-size:8px;color:var(--muted);font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.clockValue{font-size:24px;font-weight:750;letter-spacing:-.6px;font-variant-numeric:tabular-nums;margin-top:2px}
+.clockSub{font-size:9px;color:#8da5b3;margin-top:1px}
+.clockBox+ .clockBox{border-left:1px solid rgba(255,255,255,.09);padding-left:14px}
+
+/* ---------- search ---------- */
+#quickSearch{
+  display:flex;align-items:center;gap:10px;margin:13px 0;
+  padding:13px 14px;border-radius:17px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.055);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+#quickSearch span{font-size:19px;color:#9eb6c4}
+#quickSearch input{
+  width:100%;border:0;outline:0;background:transparent;color:#fff;
+  font:14px inherit;
+}
+#quickSearch input::placeholder{color:#6e8795}
+#searchCount{font-size:9px;color:var(--blue);font-weight:750;white-space:nowrap}
+
+/* ---------- dynamic list ---------- */
+.sec-h{
+  margin:14px 3px 11px;color:#91a8b6;
+  font-size:10px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;
+}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tile{
+  position:relative;min-height:142px;padding:15px;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;cursor:pointer;
+  border-radius:21px;border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 12px 30px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.06);
+  transition:transform .15s ease,border-color .15s ease;
+}
+.tile:active{transform:scale(.975);border-color:rgba(85,200,255,.4)}
+.tile:after{
+  content:"›";position:absolute;right:12px;bottom:12px;
+  width:27px;height:27px;display:grid;place-items:center;border-radius:50%;
+  color:#d8edf7;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);
+  font-size:20px;
+}
+.tile .ic{
+  position:absolute;top:15px;left:15px;width:44px;height:44px;
+  display:grid;place-items:center;border-radius:14px;font-size:21px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);
+}
+.tile .nm{max-width:82%;font-size:15px;font-weight:750;line-height:1.18;color:#fff}
+.tile .mt{max-width:88%;margin-top:5px;color:#8299a7;font-size:10px;line-height:1.3;font-weight:600}
+.tile .rr{
+  width:max-content;margin-top:7px;padding:3px 7px;border-radius:999px;
+  color:var(--blue);background:rgba(75,185,255,.10);font-size:8.5px;font-weight:800
+}
+.tile:nth-child(4n+1){background:linear-gradient(145deg,rgba(16,102,180,.34),rgba(7,27,44,.82))}
+.tile:nth-child(4n+2){background:linear-gradient(145deg,rgba(7,137,128,.28),rgba(5,34,39,.82))}
+.tile:nth-child(4n+3){background:linear-gradient(145deg,rgba(171,105,27,.27),rgba(46,28,9,.82))}
+.tile:nth-child(4n+4){background:linear-gradient(145deg,rgba(91,70,173,.31),rgba(25,18,53,.82))}
+
+/* ---------- detail ---------- */
+#detail{display:none}
+#detail.on{display:block}
+.back{
+  display:inline-flex;align-items:center;gap:5px;
+  margin:4px 0 14px;padding:8px 12px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.05);
+  color:var(--blue);font-size:13px;font-weight:700
+}
+.dh{
+  padding:17px;margin-bottom:11px;border-radius:21px;
+  border:1px solid rgba(255,255,255,.10);
+  background:linear-gradient(145deg,rgba(35,119,184,.22),rgba(255,255,255,.035));
+}
+.dh .ic{font-size:29px;margin-bottom:8px}
+.dh h2{margin:0;color:#fff;font-size:21px;line-height:1.2;letter-spacing:-.4px}
+.dh .sub{margin-top:4px;color:#718896;font-size:11px}
+.dh .rr{display:inline-block;margin-top:9px;padding:4px 8px;border-radius:999px;color:var(--blue);background:rgba(57,174,255,.10);font-size:9px;font-weight:800}
+.grp{
+  margin-top:8px;overflow:hidden;border-radius:17px;
+  border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.035);
+  box-shadow:0 8px 22px rgba(0,0,0,.12)
+}
+.gh{padding:13px;background:rgba(255,255,255,.025)}
+.gt{color:#fff;font-size:13px;font-weight:700}
+.gn{color:#718896;font-size:10px}.ar{color:var(--blue)}
+.gc{padding:0 13px 12px}
+ul.its li{color:#c0d0d9;border-top-color:rgba(255,255,255,.06);font-size:13px}
+
+/* ---------- note ---------- */
+.note{
+  margin:16px 3px 8px;padding:13px 14px;border-radius:16px;
+  color:#718896;background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.06);font-size:10px;line-height:1.55
+}
+
+/* ---------- bottom dock ---------- */
+#dock{
+  position:fixed;left:50%;bottom:calc(11px + var(--safe-bottom));transform:translateX(-50%);
+  z-index:50;width:calc(100% - 22px);max-width:520px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:6px;
+  border-radius:23px;border:1px solid rgba(255,255,255,.13);
+  background:rgba(4,17,28,.80);
+  backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);
+  box-shadow:0 18px 45px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08)
+}
+#glide{
+  top:6px;bottom:6px;border-radius:17px;
+  background:linear-gradient(145deg,rgba(57,170,255,.20),rgba(34,103,180,.15));
+  border:1px solid rgba(70,184,255,.18)
+}
+#dock button{min-width:0;padding:8px 4px;border-radius:17px;color:#718795;font-size:9px;font-weight:700}
+#dock button .ti{font-size:19px;margin-bottom:2px}
+#dock button.on{color:var(--blue)}
+
+/* ---------- time zone sheet ---------- */
+#sheet{background:rgba(0,7,13,.68);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.sh{
+  max-height:90vh;border-radius:25px 25px 0 0;
+  background:linear-gradient(180deg,#0b1c2a,#06111c);
+  border:1px solid rgba(255,255,255,.09);box-shadow:0 -20px 60px rgba(0,0,0,.45)
+}
+.sh-top{padding:17px 16px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sh-tt h3{color:#fff;font-size:17px}
+.sh-tt button{color:var(--blue)}
+#zq{color:#fff;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:12px 14px;outline:0}
+.zi{padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.055)}
+.zi.cur{background:rgba(55,177,255,.10)}
+.zc{color:#fff;font-size:14px}.zn{color:#718896}.zt .t{color:var(--blue)}.zt .o{color:#718896}
+
+/* ---------- mobile ---------- */
+@media(max-width:390px){
+  #top{padding-left:12px;padding-right:12px}
+  #brand span{display:none}
+  #brand b{font-size:15px}
+  main{padding-left:12px;padding-right:12px}
+  .heroQuote{font-size:16px;max-width:235px}
+  .heroShip{right:-12px;opacity:.8}
+  .tile{min-height:136px;padding:14px}
+}
+@media(max-width:350px){
+  #brand{display:none}
+  .tiles{gap:8px}
+  .tile{min-height:130px}
+  #dock button{font-size:8px}
+}
+</style>
 </head>
+
 <body>
 
 <header id="top">
-  <div id="brand"><b>2/O</b> Bridge Reference</div>
+  <div id="brand">
+    <b>NNMAPP</b>
+    <span>Marine Reference</span>
+  </div>
+
   <div class="pills">
-    <div class="pill"><span class="k">UTC</span><span class="v" id="utcT">--:--</span></div>
-    <div class="pill loc" id="locPill">
+    <div class="pill">
+      <span class="k">UTC</span>
+      <span class="v" id="utcT">--:--</span>
+    </div>
+    <div class="pill loc" id="locPill" title="Change time zone">
       <span class="v" id="locT">--:--</span>
       <span class="pl" id="locZ">—</span>
     </div>
-    <button id="themeb" title="Toggle theme">◐</button>
+    <button id="themeb" title="Toggle theme" aria-label="Toggle theme">◐</button>
   </div>
 </header>
 
 <main>
+
+  <!-- Premium home hero -->
+  <section id="homeHero">
+
+    <div class="heroTop">
+      <div class="heroTitle">
+        MARINE REFERENCE
+        <strong>Good day, Officer</strong>
+      </div>
+      <div class="heroMenu">☰</div>
+    </div>
+
+    <div class="heroQuote">
+      A safer voyage through better information.
+      <small>Navigation • Equipment • Duties • Arrival / Departure</small>
+    </div>
+
+    <div class="heroShip" aria-hidden="true">
+      <div class="hull"></div>
+      <div class="deck"></div>
+      <div class="bridge"></div>
+      <div class="mast"></div>
+      <div class="light"></div>
+    </div>
+
+    <div class="wave"></div>
+
+    <div class="clockPanel">
+
+      <div class="clockBox">
+        <div class="clockLabel">UTC Time</div>
+        <div class="clockValue" id="heroUtc">--:--</div>
+        <div class="clockSub">Universal Time</div>
+      </div>
+
+      <div class="clockBox">
+        <div class="clockLabel">Ship Time</div>
+        <div class="clockValue" id="heroLocal">--:--</div>
+        <div class="clockSub" id="heroZone">Local time</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Search -->
+  <div id="quickSearch">
+    <span>⌕</span>
+    <input id="indexSearch" type="search"
+           placeholder="Search equipment, procedures, manuals…"
+           autocomplete="off" spellcheck="false">
+    <span id="searchCount"></span>
+  </div>
+
   <div id="list"></div>
   <div id="detail"></div>
+
 </main>
 
 <nav id="dock">
+
   <div id="glide"></div>
-  <button data-t="equip" class="on"><span class="ti">&#128225;</span>Equipment</button>
-  <button data-t="passage"><span class="ti">&#128506;</span>Passage</button>
-  <button data-t="duty"><span class="ti">&#9875;</span>Duties</button>
-  <button data-t="arr"><span class="ti">&#128674;</span>Arr/Dep</button>
+
+  <button data-t="equip" class="on">
+    <span class="ti">&#128225;</span>
+    Equipment
+  </button>
+
+  <button data-t="passage">
+    <span class="ti">&#128506;</span>
+    Passage
+  </button>
+
+  <button data-t="duty">
+    <span class="ti">&#9875;</span>
+    Duties
+  </button>
+
+  <button data-t="arr">
+    <span class="ti">&#128674;</span>
+    Arr/Dep
+  </button>
+
 </nav>
 
 <div id="sheet">
+
   <div class="sh">
+
     <div class="sh-top">
       <div class="sh-tt">
         <h3>Select time zone</h3>
         <button id="shClose">Done</button>
       </div>
-      <input id="zq" type="search" placeholder="Search country, city or port…"
-             autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+
+      <input id="zq" type="search"
+             placeholder="Search country, city or port…"
+             autocomplete="off" autocorrect="off"
+             autocapitalize="off" spellcheck="false">
     </div>
+
     <div id="zlist"></div>
+
   </div>
 </div>
 
@@ -64,5 +440,72 @@
 <script src="data-arrdep.js"></script>
 <script src="data-zones.js"></script>
 <script src="app.js"></script>
+
+<script>
+/* =========================================================
+   HOME-ONLY ENHANCEMENTS
+   Works on top of the existing app.js.
+   ========================================================= */
+
+(function(){
+
+  var hero = document.getElementById("homeHero");
+  var search = document.getElementById("indexSearch");
+  var count = document.getElementById("searchCount");
+
+  function syncHeroClock(){
+    var u=document.getElementById("utcT");
+    var l=document.getElementById("locT");
+    var z=document.getElementById("locZ");
+
+    if(u) document.getElementById("heroUtc").textContent=u.textContent;
+    if(l) document.getElementById("heroLocal").textContent=l.textContent;
+    if(z) document.getElementById("heroZone").textContent=z.textContent || "Ship local time";
+  }
+
+  setInterval(syncHeroClock,500);
+  syncHeroClock();
+
+  /* Search existing dynamically-rendered tiles */
+  function filterTiles(){
+    var q=(search.value||"").trim().toLowerCase();
+    var tiles=document.querySelectorAll("#list .tile");
+    var visible=0;
+
+    tiles.forEach(function(tile){
+      var text=tile.textContent.toLowerCase();
+      var show=!q || text.indexOf(q)>=0;
+      tile.style.display=show ? "" : "none";
+      if(show) visible++;
+    });
+
+    if(q){
+      count.textContent=visible+" found";
+    }else{
+      count.textContent="";
+    }
+  }
+
+  search.addEventListener("input",filterTiles);
+
+  /* Re-apply filtering whenever app.js changes the list */
+  var list=document.getElementById("list");
+  new MutationObserver(function(){
+    if(search.value) filterTiles();
+  }).observe(list,{childList:true,subtree:true});
+
+  /* Hide the hero/search when opening an item */
+  var detail=document.getElementById("detail");
+  var searchWrap=document.getElementById("quickSearch");
+
+  new MutationObserver(function(){
+    var open=detail.classList.contains("on");
+    hero.style.display=open ? "none" : "";
+    searchWrap.style.display=open ? "none" : "";
+  }).observe(detail,{attributes:true,attributeFilter:["class"]});
+
+})();
+</script>
+
 </body>
 </html>
