@@ -304,6 +304,353 @@ ul.its li{color:#c0d0d9;border-top-color:rgba(255,255,255,.06);font-size:13px}
   .tile{min-height:130px}
   #dock button{font-size:8px}
 }
+
+/* =========================================================
+   FINAL FIXES
+   1. No ship illustration in hero.
+   2. Tile icon/text never overlap.
+   3. Real light/dark theme support.
+   ========================================================= */
+
+/* ---------- Theme tokens ---------- */
+
+:root{
+  --bg:#020a12;
+  --bg2:#061522;
+  --card:rgba(12,34,50,.72);
+  --card-solid:#0c2232;
+  --line:rgba(255,255,255,.10);
+  --text:#f4f8fb;
+  --soft:#a9bdca;
+  --muted:#718896;
+  --blue:#58c8ff;
+  --blue2:#278cff;
+  --teal:#36d7c0;
+  --gold:#f5b84b;
+  --purple:#9d83ff;
+  --nav-text:#718795;
+  --hero-start:#163f58;
+  --hero-mid:#0b2639;
+  --hero-end:#03111c;
+}
+
+/* Explicit light mode */
+html[data-theme="light"]{
+  --bg:#f3f7fa;
+  --bg2:#ffffff;
+  --card:rgba(255,255,255,.92);
+  --card-solid:#ffffff;
+  --line:rgba(8,35,52,.12);
+  --text:#102330;
+  --soft:#496373;
+  --muted:#718896;
+  --blue:#087fc2;
+  --blue2:#176fe0;
+  --teal:#008f7d;
+  --gold:#a96b00;
+  --purple:#6d51c9;
+  --nav-text:#617582;
+  --hero-start:#8fd8f5;
+  --hero-mid:#dceff7;
+  --hero-end:#f5fbfd;
+}
+
+@media (prefers-color-scheme: light){
+  html:not([data-theme="dark"]){
+    --bg:#f3f7fa;
+    --bg2:#ffffff;
+    --card:rgba(255,255,255,.92);
+    --card-solid:#ffffff;
+    --line:rgba(8,35,52,.12);
+    --text:#102330;
+    --soft:#496373;
+    --muted:#718896;
+    --blue:#087fc2;
+    --blue2:#176fe0;
+    --teal:#008f7d;
+    --gold:#a96b00;
+    --purple:#6d51c9;
+    --nav-text:#617582;
+    --hero-start:#8fd8f5;
+    --hero-mid:#dceff7;
+    --hero-end:#f5fbfd;
+  }
+}
+
+/* ---------- Body theme ---------- */
+
+html[data-theme="light"] body{
+  color:var(--text);
+  background:
+    radial-gradient(circle at 8% -5%,rgba(41,151,255,.14),transparent 32%),
+    radial-gradient(circle at 100% 22%,rgba(98,77,255,.08),transparent 30%),
+    linear-gradient(180deg,#f7fbfd 0%,#eef5f8 50%,#e7f0f4 100%);
+}
+
+html[data-theme="dark"] body{
+  color:var(--text);
+  background:
+    radial-gradient(circle at 8% -5%,rgba(41,151,255,.22),transparent 32%),
+    radial-gradient(circle at 100% 22%,rgba(98,77,255,.13),transparent 30%),
+    linear-gradient(180deg,#04111c 0%,#061522 45%,#020a12 100%);
+}
+
+/* Make the browser/theme button visibly switch */
+html[data-theme="light"] #themeb{
+  color:#102330;
+  background:rgba(255,255,255,.82);
+  border-color:rgba(8,35,52,.13);
+}
+
+/* ---------- Hero: retain background, remove ship drawing ---------- */
+
+.heroShip{
+  display:none !important;
+}
+
+html[data-theme="light"] #homeHero{
+  background:
+    radial-gradient(circle at 78% 22%,rgba(255,191,79,.28),transparent 16%),
+    linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.28) 46%,rgba(255,255,255,.72) 100%),
+    linear-gradient(135deg,var(--hero-start),var(--hero-mid) 55%,var(--hero-end));
+  border-color:rgba(8,35,52,.12);
+}
+
+html[data-theme="light"] .heroTitle,
+html[data-theme="light"] .heroQuote{
+  color:#17384a;
+}
+
+html[data-theme="light"] .heroTitle strong{
+  color:#102330;
+}
+
+html[data-theme="light"] .heroQuote small{
+  color:#5c7482;
+}
+
+/* ---------- THE IMPORTANT FIX:
+   icons occupy their own top area; text stays below ---------- */
+
+.tile{
+  min-height:156px !important;
+  padding:76px 16px 16px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:flex-end !important;
+  align-items:flex-start !important;
+}
+
+.tile .ic{
+  position:absolute !important;
+  top:15px !important;
+  left:15px !important;
+  width:46px !important;
+  height:46px !important;
+  flex:0 0 46px !important;
+  z-index:1 !important;
+}
+
+.tile .nm{
+  position:relative !important;
+  z-index:2 !important;
+  display:block !important;
+  width:100% !important;
+  max-width:calc(100% - 4px) !important;
+  padding-right:34px !important;
+  margin:0 !important;
+  color:#fff !important;
+  font-size:15px !important;
+  line-height:1.18 !important;
+  min-height:18px !important;
+}
+
+.tile .mt{
+  position:relative !important;
+  z-index:2 !important;
+  width:100% !important;
+  max-width:calc(100% - 4px) !important;
+  padding-right:34px !important;
+  margin-top:6px !important;
+}
+
+.tile .rr{
+  position:relative !important;
+  z-index:2 !important;
+  margin-top:8px !important;
+  max-width:calc(100% - 35px) !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+}
+
+.tile:after{
+  z-index:3 !important;
+  right:12px !important;
+  bottom:12px !important;
+}
+
+/* The icon must never sit over the title, even for 2-line names. */
+@media(max-width:390px){
+  .tile{
+    min-height:154px !important;
+    padding:76px 14px 15px !important;
+  }
+  .tile .ic{
+    top:14px !important;
+    left:14px !important;
+  }
+}
+
+/* ---------- Light mode cards ---------- */
+
+html[data-theme="light"] .tile{
+  border-color:rgba(8,35,52,.12);
+  box-shadow:0 10px 26px rgba(24,65,85,.10),inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+html[data-theme="light"] .tile .nm{
+  color:#fff !important;
+}
+
+html[data-theme="light"] .tile .mt{
+  color:rgba(255,255,255,.72);
+}
+
+html[data-theme="light"] .tile .ic{
+  background:rgba(255,255,255,.13);
+  border-color:rgba(255,255,255,.20);
+}
+
+html[data-theme="light"] .note{
+  color:#5e7582;
+  background:rgba(255,255,255,.72);
+  border-color:rgba(8,35,52,.09);
+}
+
+html[data-theme="light"] .sec-h{
+  color:#607784;
+}
+
+/* Keep category card colors attractive in light mode,
+   but give them enough contrast for white text. */
+html[data-theme="light"] .tile:nth-child(4n+1){
+  background:linear-gradient(145deg,#176ca2,#0b4167);
+}
+html[data-theme="light"] .tile:nth-child(4n+2){
+  background:linear-gradient(145deg,#087d76,#07514f);
+}
+html[data-theme="light"] .tile:nth-child(4n+3){
+  background:linear-gradient(145deg,#a56818,#68410d);
+}
+html[data-theme="light"] .tile:nth-child(4n+4){
+  background:linear-gradient(145deg,#6250a8,#3b2d78);
+}
+
+/* ---------- Light mode search ---------- */
+
+html[data-theme="light"] #quickSearch{
+  background:rgba(255,255,255,.88);
+  border-color:rgba(8,35,52,.12);
+  box-shadow:0 7px 20px rgba(24,65,85,.08);
+}
+
+html[data-theme="light"] #quickSearch input{
+  color:#102330;
+}
+
+html[data-theme="light"] #quickSearch input::placeholder{
+  color:#81939d;
+}
+
+html[data-theme="light"] #quickSearch span{
+  color:#607784;
+}
+
+/* ---------- Light mode bottom navigation ---------- */
+
+html[data-theme="light"] #dock{
+  background:rgba(255,255,255,.86);
+  border-color:rgba(8,35,52,.12);
+  box-shadow:0 16px 38px rgba(24,65,85,.18);
+}
+
+html[data-theme="light"] #dock button{
+  color:#73858f;
+}
+
+html[data-theme="light"] #dock button.on{
+  color:#087fc2;
+}
+
+html[data-theme="light"] #glide{
+  background:linear-gradient(145deg,rgba(34,148,218,.15),rgba(34,103,180,.08));
+  border-color:rgba(34,148,218,.18);
+}
+
+/* ---------- Light mode header ---------- */
+
+html[data-theme="light"] #brand{
+  color:#617582;
+}
+
+html[data-theme="light"] #brand b{
+  color:#102330;
+}
+  
+  html[data-theme="light"] .pill{
+  background:rgba(255,255,255,.82);
+  border-color:rgba(8,35,52,.12);
+}
+
+html[data-theme="light"] .pill .v{
+  color:#102330;
+}
+
+/* ---------- Light mode detail/sheet ---------- */
+
+html[data-theme="light"] .dh{
+  background:linear-gradient(145deg,rgba(30,145,207,.12),rgba(255,255,255,.88));
+  border-color:rgba(8,35,52,.10);
+}
+
+html[data-theme="light"] .dh h2,
+html[data-theme="light"] .gt{
+  color:#102330;
+}
+
+html[data-theme="light"] .grp{
+  background:rgba(255,255,255,.85);
+  border-color:rgba(8,35,52,.09);
+}
+
+html[data-theme="light"] ul.its li{
+  color:#425c69;
+  border-top-color:rgba(8,35,52,.08);
+}
+
+html[data-theme="light"] .sh{
+  background:linear-gradient(180deg,#ffffff,#eef5f8);
+}
+
+html[data-theme="light"] .sh-tt h3{
+  color:#102330;
+}
+
+html[data-theme="light"] #zq{
+  color:#102330;
+  background:#f2f6f8;
+  border-color:rgba(8,35,52,.12);
+}
+
+html[data-theme="light"] .zi{
+  border-bottom-color:rgba(8,35,52,.07);
+}
+
+html[data-theme="light"] .zc{
+  color:#102330;
+}
+
 </style>
 </head>
 
@@ -344,14 +691,6 @@ ul.its li{color:#c0d0d9;border-top-color:rgba(255,255,255,.06);font-size:13px}
     <div class="heroQuote">
       A safer voyage through better information.
       <small>Navigation • Equipment • Duties • Arrival / Departure</small>
-    </div>
-
-    <div class="heroShip" aria-hidden="true">
-      <div class="hull"></div>
-      <div class="deck"></div>
-      <div class="bridge"></div>
-      <div class="mast"></div>
-      <div class="light"></div>
     </div>
 
     <div class="wave"></div>
@@ -504,6 +843,41 @@ ul.its li{color:#c0d0d9;border-top-color:rgba(255,255,255,.06);font-size:13px}
     searchWrap.style.display=open ? "none" : "";
   }).observe(detail,{attributes:true,attributeFilter:["class"]});
 
+})();
+</script>
+
+
+<script>
+/* ---------- Reliable NNMAPP theme controller ---------- */
+(function(){
+  var btn = document.getElementById("themeb");
+
+  function getTheme(){
+    return document.documentElement.getAttribute("data-theme") ||
+      (window.matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light");
+  }
+
+  function paint(){
+    var t=getTheme();
+    document.documentElement.setAttribute("data-theme",t);
+    if(btn) btn.textContent=(t==="dark" ? "☀" : "◐");
+  }
+
+  /* app.js already has a theme listener. This second listener guarantees
+     the visual theme is repainted after that listener runs. */
+  if(btn){
+    btn.addEventListener("click",function(){
+      setTimeout(function(){
+        var current=getTheme();
+        var next=current==="dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme",next);
+        localStorage.setItem("theme",next);
+        btn.textContent=(next==="dark" ? "☀" : "◐");
+      },0);
+    });
+  }
+
+  paint();
 })();
 </script>
 
